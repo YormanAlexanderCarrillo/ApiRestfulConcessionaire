@@ -19,7 +19,7 @@ module.exports={
     findById: async (req, res)=>{
         try {
             const {id} = req.params
-            const dataCustomer = await customer.findById(id)
+            const dataCustomer = await customer.findOne({id: id})
             res.status(200).json({
                 "status": true,
                 "data": dataCustomer
@@ -36,11 +36,13 @@ module.exports={
         try {
             const Customer = new customer(req.body)
             const data = await Customer.save()
+            console.log(data)
             res.status(200).json({
                 "status": true,
                 "data": data
             })
         } catch (error) {
+            console.log("error que se produce: " + error)
             res.status(500).json({
                 "status": false,
                 "error": error
@@ -50,7 +52,7 @@ module.exports={
     erase: async (req, res)=>{
         try {
             const {id} = req.params
-            const deletedCustomer = await customer.findByIdAndDelete(id)
+            const deletedCustomer = await customer.deleteOne({id:id})
             res.status(200).json({
                 "status": true,
                 "data": deletedCustomer

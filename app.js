@@ -12,3 +12,4 @@ app.listen(app.get('PORT'), ()=>{
 require('./drivers/connect_db')
 app.use('/customers', require('./routes/customers'))
 app.use('/cars', require('./routes/cars'))
+app.use('/administrators', require('./routes/administrator'))

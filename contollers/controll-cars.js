@@ -18,7 +18,7 @@ module.exports ={
     findById: async (req, res)=>{
         try{
             const {id} = req.params
-            const dataCar = await car.findById(id)
+            const dataCar = await car.findOne({plate:id})
             res.status(200).json({
                 "status": true,
                 "data": dataCar
@@ -48,14 +48,14 @@ module.exports ={
     erase: async (req, res)=>{
         try {
             const {id} = req.params
-            const deletedCar = await car.findByIdAndDelete(id)
+            const deletedCar = await car.deleteOne({plate:id})
             res.status(200).json({
                 "status": true,
                 "data": deletedCar
             })
         } catch (error) {
             res.status(500).json({
-                "status": true,
+                "status": false,
                 "error": error
             })
         }
